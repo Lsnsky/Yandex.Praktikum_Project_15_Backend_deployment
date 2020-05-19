@@ -1,0 +1,36 @@
+{
+    "name": "yandex.praktikum_project_12_node",
+    "version": "1.0.0",
+    "description": "node.js",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon app.js",
+        "dev": "nodemon app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Lsnsky/Yandex.Praktikum_Project_12_Node.js.git"
+    },
+    "author": "Igor Lisyanskiy",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Lsnsky/Yandex.Praktikum_Project_12_Node.js/issues"
+    },
+    "homepage": "https://github.com/Lsnsky/Yandex.Praktikum_Project_12_Node.js#readme",
+    "devDependencies": {
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb-base": "^14.1.0",
+        "eslint-plugin-import": "^2.20.2",
+        "nodemon": "^2.0.2"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "helmet": "^3.22.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.9.9",
+        "validator": "^13.0.0"
+    }
+}
