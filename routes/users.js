@@ -9,20 +9,24 @@ const {
 } = require('../controllers/users');
 
 router.get('/', getUsers);
-router.get('/:id', getUserById);
+router.get('/:id', celebrate({
+  params: Joi.object().keys({
+    id: Joi.string().required().length(24),
+  }),
+}), getUserById);
 
 // обновление профиля пользователя
 router.patch('/me', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     about: Joi.string().required().min(2).max(30),
-  }).unknown(true),
+  }),
 }), updateUserProfile);
 
 // обновление аватара пользователя
 router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().required(),
+    avatar: Joi.string().required().uri(),
   }).unknown(true),
 }), updateUserAvatar);
 

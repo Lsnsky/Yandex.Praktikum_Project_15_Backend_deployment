@@ -3,6 +3,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 
 
@@ -28,8 +29,21 @@ app.use(helmet());
 app.use(requestLogger);
 
 // роуты регистрации и логина
-app.post('/signin', login);
-app.post('/signup', createUser);
+app.post('/signin', celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(8),
+  }),
+}), login);
+app.post('/signup', celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().required().min(2).max(30),
+    about: Joi.string().required().min(2).max(30),
+    avatar: Joi.string().required().uri(),
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(8),
+  }),
+}), createUser);
 
 // авторизация
 app.use(auth);
