@@ -13,7 +13,7 @@
 
 ### Ссылки
 
-- <a href="https://projectmesto.site" target="_blank">Фронтенд проекта: projectmesto.site</a>
+- [Фронтенд проекта: projectmesto.site](https://projectmesto.site){:target="_blank"}
 - <a href="https://api.projectmesto.site" target="_blank">Бэкенд проекта: api.projectmesto.site</a>
 - <a href="https://github.com/Lsnsky/Yandex.Praktikum_Project_15_Backend_deployment" target="_blank">Актуальная версия проекта на Github - v1.0.0</a>
 
