@@ -3,12 +3,14 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const { errors } = require('celebrate');
 
 
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -22,6 +24,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(helmet());
+// подключение логгера запросов
+app.use(requestLogger);
 
 // роуты регистрации и логина
 app.post('/signin', login);
@@ -34,22 +38,35 @@ app.use(auth);
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
 
+// подключение логгера ошибок
+app.use(errorLogger);
+
+
+// обработчики ошибок
+
+// ошибка при неправильном адресе в строке
 app.use('*', (req, res) => {
   res.status(404).json({ message: 'Запрашиваемый ресурс не найден' });
 });
 
-const catchErrorMIddleware = ((err, req, res, next) => {
+// обработчик ошибок celebrate
+app.use(errors());
+
+// централизованный обработчик ошибок
+app.use((err, req, res, next) => {
+  const { statusCode = 500, message } = err;
   if (err instanceof SyntaxError) {
     console.error(err);
-    return res.status(err.status).send({ status: err.status, message: err.message });
+    return res.status(err.status).send({ message: err.message });
   }
-  // if (err.status(500)) {
-  //     return res.status(500).send({ message: err.message });
-  // }
+  res
+    .status(statusCode)
+    .send({
+      message: statusCode === 500
+        ? err.message : message,
+    });
   return next();
 });
-
-app.use(catchErrorMIddleware);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
