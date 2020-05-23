@@ -13,9 +13,9 @@
 
 ### Ссылки
 
-- [Фронтенд проекта](https://projectmesto.site)
-- [Бэкенд проекта](https://api.projectmesto.site)
-- [Актуальная версия проекта (v1.0.0) на Github](https://github.com/Lsnsky/Yandex.Praktikum_Project_14_Authentication)
+- <a href="https://projectmesto.site" target="_blank">Фронтенд проекта: projectmesto.site</a>
+- <a href="https://api.projectmesto.site" target="_blank">Бэкенд проекта: api.projectmesto.site</a>
+- <a href="https://github.com/Lsnsky/Yandex.Praktikum_Project_15_Backend_deployment" target="_blank">Актуальная версия проекта на Github - v1.0.0</a>
 
 ### ПО для выполнения задания:
 
@@ -50,5 +50,5 @@ eslint, eslint-config-airbnb-base, eslint-plugin-import, express, mongoose, body
   
 ### Итоги проектной работы:
 
-- создан бесплатный удаленный сервер на базе [Яндекс Облако](https://cloud.yandex.ru/). К серверу привязан домен.
-- сервер отвечает на запросы при обращении к [api](https://api.projectmesto.site) и отдает фронтенд проекта [Место](https://projectmesto.site).
+- создан бесплатный удаленный сервер на базе <a href="https://cloud.yandex.ru/" target="_blank">Яндекс Облако</a>. К серверу привязан домен.
+- сервер отвечает на запросы при обращении к <a href="https://api.projectmesto.site" target="_blank">api</a> и отдает фронтенд проекта <a href="https://projectmesto.site" target="_blank">Место</a>.
