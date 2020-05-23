@@ -9,6 +9,7 @@ const {
 } = require('../controllers/users');
 
 router.get('/', getUsers);
+
 router.get('/:id', celebrate({
   params: Joi.object().keys({
     id: Joi.string().required().length(24),
