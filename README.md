@@ -13,9 +13,14 @@
 
 ### Ссылки
 
-- [Фронтенд проекта: projectmesto.site](https://projectmesto.site){:target="_blank"}
-- <a href="https://api.projectmesto.site" target="_blank">Бэкенд проекта: api.projectmesto.site</a>
-- <a href="https://github.com/Lsnsky/Yandex.Praktikum_Project_15_Backend_deployment" target="_blank">Актуальная версия проекта на Github - v1.0.0</a>
+- Фронтенд проекта доступен по адресам:
+  - [projectmesto.site](https://projectmesto.site)
+  - [www.projectmesto.site](https://www.projectmesto.site) 
+- Бэкенд проекта доступен по адресам: 
+  - [api.projectmesto.site](https://api.projectmesto.site)
+  - [www.api.projectmesto.site](https://www.api.projectmesto.site)
+  - [130.193.38.131](http://130.193.38.131/)
+- [Актуальная версия проекта на Github - v1.0.0](https://github.com/Lsnsky/Yandex.Praktikum_Project_15_Backend_deployment)
 
 ### ПО для выполнения задания:
 
@@ -32,13 +37,14 @@ eslint, eslint-config-airbnb-base, eslint-plugin-import, express, mongoose, body
   
 
 ### Инструкция по сборке:
-- сервер запускается командой **npm run start** по адресу **localhost:3000**
-- Node.js приложение подключается к серверу Mongo по адресу **mongodb://localhost:27017/mestodb**
-- при отправке запросов в заголовок **authorization** нужно записать схему аутентификации (используем **Bearer**) и токен через пробел: 
-  - **GET/users** возвращает всех пользователей из базы
-  - **GET/users/:userId** возвращает конкретного пользователя
+- бекенд на сервере запускается командой **pm2 start app.js**
+- при отправке запросов через **Postman** в заголовок **authorization** нужно записать схему аутентификации (используем **Bearer**) и токен через пробел: 
+
   - **POST/signup** создаёт пользователя. В теле POST-запроса на создание пользователя передается JSON-объект с пятью полями: **name**, **about**, **avatar**, **email**, **password**
   - **POST/signin** производит авторизацию пользователя. Если успешно - токен возвращается в ответе и записыватеся в cookie с включенной опцией httpOnly. В теле POST-запроса на создание пользователя передается JSON-объект с двумя полями: **email**, **password**
+  
+  - **GET/users** возвращает всех пользователей из базы
+  - **GET/users/:userId** возвращает конкретного пользователя
   - **GET/cards** возвращает все карточки всех пользователей
   - **POST/cards** создаёт карточку. В теле POST-запроса на создание карточки передается JSON-объект с двумя полями: **name** и **link**.
   - **DELETE/cards/:cardId** удаляет карточку по идентификатору
@@ -50,5 +56,7 @@ eslint, eslint-config-airbnb-base, eslint-plugin-import, express, mongoose, body
   
 ### Итоги проектной работы:
 
-- создан бесплатный удаленный сервер на базе <a href="https://cloud.yandex.ru/" target="_blank">Яндекс Облако</a>. К серверу привязан домен.
-- сервер отвечает на запросы при обращении к <a href="https://api.projectmesto.site" target="_blank">api</a> и отдает фронтенд проекта <a href="https://projectmesto.site" target="_blank">Место</a>.
+- создан бесплатный удаленный сервер на базе [Яндекс Облако](https://cloud.yandex.ru). К серверу привязаны домен и субдомены
+- на сервере развернут фронтенд и бекенд проекта Место
+- сервер отвечает на запросы и отдает фронтенд проекта Место при обращении по раздельным адресам
+- ошибки сервера обрабатываются централизовано
