@@ -12,6 +12,7 @@ const cardsRouter = require('./routes/cards');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const BadGatewayError = require('./errors/bad-gateway-err');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -31,7 +32,7 @@ app.use(requestLogger);
 // краш-тест
 app.get('/crash-test', () => {
   setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
+    throw new BadGatewayError('Сервер сейчас упадёт');
   }, 0);
 });
 
@@ -74,19 +75,14 @@ app.use('*', (req, res) => {
 app.use(errors());
 
 // централизованный обработчик ошибок
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   const { statusCode = 500, message } = err;
-  if (err instanceof SyntaxError) {
-    console.error(err);
-    return res.status(err.status).send({ message: err.message });
-  }
   res
     .status(statusCode)
     .send({
       message: statusCode === 500
         ? err.message : message,
     });
-  return next();
 });
 
 app.listen(PORT, () => {
