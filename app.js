@@ -75,7 +75,9 @@ app.use('*', (req, res) => {
 app.use(errors());
 
 // централизованный обработчик ошибок
-app.use((err, req, res) => {
+
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res
     .status(statusCode)

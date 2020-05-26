@@ -30,7 +30,6 @@ module.exports.createUser = (req, res, next) => {
     avatar,
     email,
   } = req.body;
-  console.log(req.body);
   bcrypt.hash(req.body.password, 10)
     .then((hash) => User.create({
       name,
@@ -44,7 +43,8 @@ module.exports.createUser = (req, res, next) => {
       if (!user) {
         throw new BadRequestError('Ошибка при отправке запроса');
       }
-      res.send({ data: user });
+      res.send(user.omitPrivate({ data: user }));
+      // res.send({ data: user });
     })
     .catch(next);
 };
@@ -52,7 +52,6 @@ module.exports.createUser = (req, res, next) => {
 // обновление профиля пользователя
 module.exports.updateUserProfile = (req, res, next) => {
   const { name, about } = req.body;
-  console.log(req.body);
   User.findByIdAndUpdate(req.user._id, { name, about }, {
     new: true, // обработчик then получит на вход обновлённую запись
     runValidators: true, // данные будут валидированы перед изменением
@@ -67,7 +66,6 @@ module.exports.updateUserProfile = (req, res, next) => {
 // обновление аватара пользователя
 module.exports.updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  console.log(req.body);
   User.findByIdAndUpdate(req.user._id, { avatar }, {
     new: true, // обработчик then получит на вход обновлённую запись
     runValidators: true, // данные будут валидированы перед изменением
