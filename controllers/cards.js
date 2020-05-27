@@ -36,7 +36,7 @@ module.exports.deleteCard = (req, res, next) => {
 // лайк
 module.exports.likeCard = (req, res, next) => {
   Card.findByIdAndUpdate(req.params.id, { $addToSet: { likes: req.user._id } }, { new: true })
-    .orFail(() => new NotFoundError('Ошибка при отправке запроса'))
+    .orFail(() => new NotFoundError(`Карточка с _id:${req.params.id} не найдена в базе данных`))
     .then((card) => {
       res.send({ data: card });
     })
@@ -46,7 +46,7 @@ module.exports.likeCard = (req, res, next) => {
 // дизлайк
 module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(req.params.id, { $pull: { likes: req.user._id } }, { new: true })
-    .orFail(() => new NotFoundError('Ошибка при отправке запроса'))
+    .orFail(() => new NotFoundError(`Карточка с _id:${req.params.id} не найдена в базе данных`))
     .then((card) => {
       res.send({ data: card });
     })
